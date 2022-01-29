@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _ = require("lodash")
+require('dotenv').config()
 
 const app = express();
 
@@ -10,10 +11,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT
 
 //Database Connection
-mongoose.connect("mongodb://localhost:27017/todolistDB");
+mongoose.connect(`mongodb+srv://memukherjee:${process.env.MONGOPASS}@cluster0.t2p2k.mongodb.net/todolistDB`);
 console.log("Connected successfully to server");
 const itemSchema = new mongoose.Schema({
   name: {
